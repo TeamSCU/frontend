@@ -1,0 +1,5 @@
+<view class="list">
+  <view class="poi" wx:for="{{ photos}}" wx:key="{{index}}">
+      <image class="ph" mode="aspectFill" src="{{ photos[index] }}" data-index="{{index}}" bindtap="previewImage2" bindlongpress="longpress" ></image>
+  </view>
+</view>

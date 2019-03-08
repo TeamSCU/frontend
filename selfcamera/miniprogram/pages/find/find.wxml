@@ -1,0 +1,22 @@
+<view class="service">
+  <!--上传图片-->
+  <view class='picture'>
+    <view class='left'>
+       选择图片
+    </view>
+    <view class='right'>
+       <view class="parcel" wx:for="{{pics}}" wx:key="{{index}}">
+       <image src="{{pics[index]}}" class="According" data-index="{{index}}" mode="aspectFill" bindtap="previewImage1"></image>
+       <image src="../../images/delete.png" class='deleteimg' catchtap="deleteImg"  data-index="{{index}}"></image>
+  </view>
+      <image src='../../images/add2.png' class='add' bindtap='choose'></image>
+    </view>
+  <button class='btn' bindtap='uploadImg'>提交</button>
+  </view> 
+</view>
+<view class="text">「我提交过的图片」</view>
+<view class="list">
+  <view class="poi" wx:for="{{ photos}}" wx:key="{{index}}">
+      <image class="ph" mode="aspectFill" src="{{ photos[index] }}" data-index="{{index}}" bindtap="previewImage2" bindlongpress="longpress" ></image>
+  </view>
+</view>
