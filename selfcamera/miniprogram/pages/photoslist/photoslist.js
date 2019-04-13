@@ -23,13 +23,15 @@ Page({
         "content-type": "application/x-www-form-urlencoded" // 默认值
       },
       success(res) {
-        console.log(res)
+        //console.log(res)
         var data = res.data
-        console.log(data)
+        //console.log(data)
+        var j=0;
         for (var i = 0; i < data.length; i++) {
           var temp = data[i].time.split(' ');
           if (time == temp[0]) {
-            photos[i] = 'https://face.3cat.top/' + data[i].path;
+            photos[j] = 'https://face.3cat.top/' + data[i].path;
+            j+=1;
           }
         }
         that.setData({
@@ -61,14 +63,37 @@ Page({
       success(res) {
         console.log(res)
         if(res.tapIndex == 0){
-          wx.saveImageToPhotosAlbum({
-            filePath:current,
-            success(res) { 
-              wx.showToast({
-                title: '下载成功',
-              })
+          wx.getSetting({
+            success(res) {
+              if (!res.authSetting['scope.writePhotosAlbum']) {
+                wx.authorize({
+                  scope: 'scope.writePhotosAlbum',
+                  success() {
+                    // 用户已经同意小程序使用相册功能，后续调用 wx.saveImageToPhotosAlbum 接口不会弹窗询问
+                    wx.saveImageToPhotosAlbum();
+
+                  }
+                })
+              }
+            }
+          });
+          wx.downloadFile({
+            url: current, // 仅为示例，并非真实的资源
+            success(res) {
+              // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+              if (res.statusCode === 200) {
+                wx.saveImageToPhotosAlbum({
+                  filePath: res.tempFilePath,
+                  success(res) {
+                    wx.showToast({
+                      title: '下载成功',
+                    })
+                  }
+                })
+              }
             }
           })
+          
         }
         if (res.tapIndex == 1){
           photos.splice(index,1);

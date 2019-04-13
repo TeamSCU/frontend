@@ -25,8 +25,7 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        var time = (util.formatTime(new Date())).replace(/[^0-9]+/g, '');
-        var tempFilePaths = res.tempFilePaths
+        var tempFilePaths = res.tempFilePaths;
         that.setData({
           pics: tempFilePaths
         })
@@ -51,6 +50,7 @@ Page({
    */
   uploadImg: function () {
     var that = this
+    var photoPath = null;
     /**
      * 加载图片
      */
@@ -68,22 +68,22 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if(res.data=='"没有检测到人脸"'){
+        if (res.data == '"没有检测到人脸"') {
           wx.showToast({
             title: '没有检测到人脸喔~(ノへ￣、)',
-            icon:'none',
+            icon: 'none',
           })
         }
-        else{
+        else {
           var data = JSON.parse(res.data)
-          console.log(data)
+          //console.log(res.data)
           for (var i = 0; i < data.length; i++) {
-            photos[i] = 'https://face.3cat.top/' + data[i].path
+          photos[i] = 'https://face.3cat.top/' + data[i].path
           }
           that.setData({
             photos: photos
           });
-        }   
+        }
       },
       fail: e => {
         console.error(e)
@@ -107,15 +107,4 @@ Page({
       urls: this.data.photos,
     })
   },
-  // longpress: function (e) {
-  //   var current = photos[e.target.dataset.index];
-  //   console.log(e)
-  //   wx.showActionSheet({
-  //     itemList: ['下载图片至本地', '移除该图片'],
-  //     success(res) {
-  //       console.log(e.tapIndex)
-  //    }
-  //   })
-  // },
-
 })

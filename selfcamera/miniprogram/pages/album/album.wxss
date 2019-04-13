@@ -15,7 +15,7 @@ page {
 }
 .list .poi{
   position: relative;
-  margin-bottom: 12rpx;
+  margin-bottom: 50rpx;
 }
 .ph{ 
   width: 349rpx;
@@ -29,4 +29,10 @@ page {
   color: #5c5c5c;
   font-size: 30rpx;
   font-weight: bold;
+}
+.refresh{ 
+  width: 349rpx;
+  height: 349rpx;
+  border-radius: 8rpx;
+  vertical-align: bottom;
 }

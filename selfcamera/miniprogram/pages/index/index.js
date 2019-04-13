@@ -16,6 +16,7 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
+    
     wx.cloud.callFunction({
       name: 'login',
       data: {},
@@ -23,7 +24,7 @@ Page({
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         wx.switchTab({
-           url: '../album/album' 
+           url: '../find/find' 
            })
       },
       fail: err => {

@@ -1,7 +1,8 @@
 <view class="list">
   <view class="poi" wx:for="{{ photos}}" wx:key="{{index}}">
       <image class="ph" mode="aspectFill" src="{{ photos[index] }}" data-index="{{index}}" bindtap="into" bindlongpress="longpress" ></image>
-      <view class="number">{{number}}</view>
-      <view class="time">{{time}}</view>
+      <!-- <view class="number">{{number}}</view> -->
+      <view class="time">{{time[index]}}</view>
   </view>
+  <image class="refresh" mode="aspectFill" src="../../images/refresh.png" bindtap="refresh" ></image>
 </view>
